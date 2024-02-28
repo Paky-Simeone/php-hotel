@@ -38,5 +38,16 @@
         ],
 
     ];
+$filter_parking =(isset($_GET['check-parking']) ? true : false);
+$filter_vote = $_GET['filter-vote'] ??  false;
 
+if ($filter_parking) {
+    $hotels = array_filter($hotels, function ($hotel, $index){
+        return $hotel['parking'] == true;
+    }, ARRAY_FILTER_USE_BOTH);
+}
+
+if($filter_vote){
+    $hotels = array_filter($hotels, fn($hotel) => $hotel['vote'] == $filter_vote);
+}
 ?>
